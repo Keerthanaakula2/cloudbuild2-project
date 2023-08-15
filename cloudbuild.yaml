@@ -1,0 +1,13 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/keerthanacicd/factorial-app:v1', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/keerthanacicd/factorial-app:v1']
+  - name: 'python'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'pip install pytest && pytest tests'
+
+images:
+  - 'gcr.io/keerthanacicd/factorial-app:v1'
